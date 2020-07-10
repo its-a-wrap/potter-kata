@@ -29,23 +29,32 @@ export class HarryPotterBasketCalculator {
         };
 
         let uniqueCount = 1;
+        uniqueCount = this.calculateUniqueCount(uniqueCount);
 
+        if (this.allBooksAreUnique(uniqueCount)) {
+            this.price = this.books.length * 8 * this.discountsBySetSize[uniqueCount];
+        } else {
+            const discountedSubtotal = (uniqueCount) * 8 * this.discountsBySetSize[uniqueCount];
+            const undiscountedSubtotal = (this.books.length - (uniqueCount)) * 8;
+
+            this.price = discountedSubtotal + undiscountedSubtotal;
+        }
+    }
+
+    allBooksAreUnique(uniqueCount) {
+        return uniqueCount === 1 || uniqueCount === this.books.length;
+    }
+
+    calculateUniqueCount(uniqueCount) {
+        this.books.sort();
         for (let i = 0; i < this.books.length; i++) {
             if (i != 0) {
-                if(this.books[i] != this.books[i-1]) {
+                if (this.books[i] != this.books[i - 1]) {
                     uniqueCount++;
                 }
             }
         }
-        if (uniqueCount === 1 || uniqueCount === this.books.length) {
-            this.price = this.books.length * 8 * this.discountsBySetSize[uniqueCount];
-            return;
-        }
-
-        const discountedSubtotal = (uniqueCount) * 8 * this.discountsBySetSize[uniqueCount];
-        const undiscountedSubtotal = (this.books.length - (uniqueCount)) * 8;
-
-        this.price = discountedSubtotal + undiscountedSubtotal;
+        return uniqueCount;
     }
 
     getPrice() {

@@ -46,7 +46,7 @@ describe('HarryPotterBasketCalculator', () => {
     });
 
     describe('AND the customer adds 5 unique books to their basket and 1 additional book', () => {
-        const harryPotterBasketCalculator = new HarryPotterBasketCalculator([0, 0, 1, 2, 3, 4]);
+        const harryPotterBasketCalculator = new HarryPotterBasketCalculator([0, 1, 2, 3, 4, 0]);
         it('SHOULD apply discount of 25% to unique books and full price for non unique book', () => {
             expect(harryPotterBasketCalculator.getPrice()).to.be.eql(38);
         });
