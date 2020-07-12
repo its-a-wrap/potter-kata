@@ -51,4 +51,8 @@ export class HarryPotterBasketCalculator {
         this.calculatePrice();
         return this.price;
     }
+
+    addBook(book) {
+        this.books.push(book);
+    }
 }
